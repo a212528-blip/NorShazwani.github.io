@@ -239,9 +239,28 @@
         /* Cards */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
             margin-top: 2.5rem;
+        }
+
+        /* Projects section - fill full width with 2 projects */
+        #projects .cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            #projects .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #projects .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card {
@@ -384,6 +403,13 @@
             margin-top: 2.5rem;
         }
 
+        @media (min-width: 1024px) {
+            .skills-container {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2rem;
+            }
+        }
+
         .skill-box {
             background: var(--white);
             padding: 2rem;
@@ -438,6 +464,13 @@
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.8rem;
             margin-top: 2.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .resources-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
         }
 
         .resource-item {
