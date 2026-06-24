@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +12,16 @@
         }
 
         :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #3498db;
-            --dark-color: #1a1a1a;
-            --light-color: #ecf0f1;
-            --accent-color: #27ae60;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --sage-green: #a8b8a0;
+            --mint-green: #c8dcc4;
+            --soft-green: #d4e8d4;
+            --cream: #f5f3f0;
+            --white: #ffffff;
+            --dark-green: #7a9170;
+            --text-dark: #3d4a3d;
+            --text-light: #6b7a6b;
+            --shadow: 0 8px 24px rgba(122, 145, 112, 0.12);
+            --shadow-sm: 0 4px 12px rgba(122, 145, 112, 0.08);
             --transition: all 0.3s ease;
         }
 
@@ -27,20 +30,25 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: #f9f9f9;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Trebuchet MS', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(168, 184, 160, 0.15) 2px, transparent 2px);
+            background-size: 40px 40px;
         }
 
         /* Navigation Bar */
         nav {
             position: sticky;
             top: 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem 0;
-            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            box-shadow: var(--shadow-sm);
             z-index: 1000;
+            border-bottom: 2px solid var(--soft-green);
         }
 
         nav ul {
@@ -48,62 +56,97 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 0;
+            gap: 0.5rem;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
         }
 
         nav a {
-            color: white;
+            color: var(--text-dark);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
             display: block;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: var(--transition);
-            border-bottom: 3px solid transparent;
+            border-radius: 20px;
+            position: relative;
         }
 
         nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-bottom-color: white;
+            color: var(--white);
+            background: var(--sage-green);
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                gap: 0;
-            }
             nav a {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
             }
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: linear-gradient(135deg, var(--mint-green) 0%, var(--soft-green) 100%);
+            color: var(--text-dark);
             text-align: center;
-            padding: 3rem 1rem;
-            margin-top: -1px;
+            padding: 4rem 1rem 3rem;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 232, 212, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(168, 184, 160, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         header p {
             font-size: 1.1rem;
-            opacity: 0.95;
+            color: var(--text-light);
+            font-weight: 400;
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 2.5rem 1rem;
+            }
             header h1 {
                 font-size: 2rem;
             }
             header p {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
         }
 
@@ -120,52 +163,77 @@
         }
 
         section h2 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            color: var(--dark-green);
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
             text-align: center;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            letter-spacing: -0.3px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--sage-green);
+            border-radius: 2px;
         }
 
         /* Introduction Section */
         .intro-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
             margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--sage-green);
         }
 
         .intro-container h3 {
-            color: var(--secondary-color);
+            color: var(--dark-green);
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .intro-container p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             line-height: 1.8;
+            color: var(--text-light);
         }
 
         .meta-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .meta-info div {
-            background: var(--light-color);
-            padding: 1rem;
-            border-left: 4px solid var(--primary-color);
-            border-radius: 4px;
+            background: linear-gradient(135deg, var(--soft-green) 0%, var(--mint-green) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: none;
+            box-shadow: var(--shadow-sm);
         }
 
         .meta-info strong {
-            color: var(--primary-color);
+            color: var(--dark-green);
             display: block;
             margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .meta-info div p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
         }
 
         /* Cards */
@@ -173,63 +241,73 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .card {
-            background: white;
-            border-radius: 8px;
+            background: var(--white);
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
+            border: 2px solid transparent;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(122, 145, 112, 0.18);
+            border-color: var(--soft-green);
         }
 
         .card-video {
             width: 100%;
             aspect-ratio: 16 / 9;
             border: none;
+            background: var(--soft-green);
         }
 
         .card-content {
-            padding: 1.5rem;
+            padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            color: var(--dark-green);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
         .card-description {
-            color: #555;
-            margin-bottom: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
             font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         .card-reflection {
-            background: var(--light-color);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--soft-green) 0%, var(--mint-green) 100%);
+            padding: 1.3rem;
+            border-radius: 14px;
+            margin-bottom: 1.2rem;
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.7;
             flex-grow: 1;
         }
 
         .card-reflection strong {
-            color: var(--primary-color);
+            color: var(--dark-green);
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .card-reflection p {
+            color: var(--text-dark);
         }
 
         .button-group {
@@ -239,72 +317,92 @@
         }
 
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.6rem;
             border: none;
-            border-radius: 4px;
-            font-weight: 500;
+            border-radius: 16px;
+            font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: var(--transition);
             text-align: center;
+            font-size: 0.9rem;
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
+            background: var(--sage-green);
+            color: var(--white);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-color);
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(122, 145, 112, 0.25);
         }
 
         .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
+            background: var(--mint-green);
+            color: var(--dark-green);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-secondary:hover {
-            background-color: #2980b9;
+            background: var(--sage-green);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(122, 145, 112, 0.25);
         }
 
         /* Reflection Section */
         .reflection-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
             box-shadow: var(--shadow);
-            border-left: 5px solid var(--primary-color);
+            border-left: 5px solid var(--sage-green);
         }
 
         .reflection-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            color: var(--dark-green);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
         .reflection-box p {
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
         }
 
         /* Skills Section */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .skill-box {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
             box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--sage-green);
+        }
+
+        .skill-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(122, 145, 112, 0.18);
         }
 
         .skill-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            color: var(--dark-green);
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
         .skill-box ul {
@@ -312,90 +410,140 @@
         }
 
         .skill-box li {
-            padding: 0.5rem 0;
-            color: #555;
-            border-bottom: 1px solid var(--light-color);
+            padding: 0.7rem 0;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--soft-green);
+            transition: var(--transition);
         }
 
         .skill-box li:last-child {
             border-bottom: none;
         }
 
+        .skill-box li:hover {
+            color: var(--dark-green);
+            padding-left: 0.5rem;
+        }
+
         .skill-box li:before {
             content: "✓ ";
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-right: 0.5rem;
+            color: var(--sage-green);
+            font-weight: 700;
+            margin-right: 0.6rem;
         }
 
         /* Resources Section */
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2.5rem;
         }
 
         .resource-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 16px;
             box-shadow: var(--shadow);
-            border-top: 4px solid var(--secondary-color);
+            transition: var(--transition);
+            border-top: 4px solid var(--mint-green);
+        }
+
+        .resource-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(122, 145, 112, 0.18);
         }
 
         .resource-item h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-size: 1rem;
         }
 
         .resource-item p {
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* AI Reference Section */
+        .ai-reference-box {
+            background: linear-gradient(135deg, var(--soft-green) 0%, var(--mint-green) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--dark-green);
+        }
+
+        .ai-reference-box p {
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .ai-reference-box p:last-child {
+            margin-bottom: 0;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-color);
-            color: white;
+            background: var(--sage-green);
+            color: var(--white);
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             margin-top: 4rem;
+            border-top: 3px solid var(--dark-green);
         }
 
         footer p {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
         }
 
         footer a {
-            color: var(--primary-color);
+            color: var(--cream);
             text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: var(--white);
         }
 
-        /* Responsive Tables */
+        /* Responsive */
         @media (max-width: 768px) {
             .cards-grid {
                 grid-template-columns: 1fr;
             }
 
             section h2 {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
+            }
+
+            section {
+                margin: 2.5rem 0;
+                padding: 1.5rem 0;
             }
 
             .meta-info {
                 grid-template-columns: 1fr;
             }
+
+            .intro-container {
+                padding: 1.8rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
         }
 
-        /* Focus styles for accessibility */
+        /* Accessibility */
         a:focus, button:focus {
-            outline: 3px solid var(--primary-color);
-            outline-offset: 2px;
+            outline: 2px solid var(--sage-green);
+            outline-offset: 3px;
         }
     </style>
 </head>
@@ -433,15 +581,15 @@
                 <div class="meta-info">
                     <div>
                         <strong>Matric No:</strong>
-                        A212528
+                        <p>A212528</p>
                     </div>
                     <div>
                         <strong>Programme:</strong>
-                        2IT1
+                        <p>2IT1</p>
                     </div>
                     <div>
                         <strong>Instructor:</strong>
-                        Dr. Rimaniza
+                        <p>Dr. Rimaniza</p>
                     </div>
                 </div>
             </div>
@@ -459,7 +607,7 @@
                         <p class="card-description">Understanding Jetpack Compose layouts and building the foundation of Moodie's user interface.</p>
                         <div class="card-reflection">
                             <strong>Reflection:</strong>
-                            This lab helped me understand the basics of Jetpack Compose layouts through the development of Moodie's home screen. I applied Column, Row, and Box components to arrange interface elements in a structured and user-friendly way. The experience improved my understanding of UI design and prepared me for future app development tasks.
+                            <p>This lab helped me understand the basics of Jetpack Compose layouts through the development of Moodie's home screen. I applied Column, Row, and Box components to arrange interface elements in a structured and user-friendly way. The experience improved my understanding of UI design and prepared me for future app development tasks.</p>
                         </div>
                     </div>
                 </article>
@@ -472,7 +620,7 @@
                         <p class="card-description">Adding interactive elements and managing state with TextField, Button, and state management.</p>
                         <div class="card-reflection">
                             <strong>Reflection:</strong>
-                            In Lab 2, I enhanced Moodie by adding interactive features using TextField, Button, and state management with remember and mutableStateOf. Users can enter information and receive immediate feedback on the screen, making the application more engaging and responsive. Through this lab, I gained a better understanding of how state works in Jetpack Compose.
+                            <p>In Lab 2, I enhanced Moodie by adding interactive features using TextField, Button, and state management with remember and mutableStateOf. Users can enter information and receive immediate feedback on the screen, making the application more engaging and responsive. Through this lab, I gained a better understanding of how state works in Jetpack Compose.</p>
                         </div>
                     </div>
                 </article>
@@ -485,7 +633,7 @@
                         <p class="card-description">Applying Material Design principles and creating a visually appealing interface with custom themes.</p>
                         <div class="card-reflection">
                             <strong>Reflection:</strong>
-                            In Lab 3, I improved the Moodie application by applying Material Design principles, including a custom theme, cards, and animations. I selected colors that reflect mental wellness and created a more visually appealing interface using Card components to organize content. This lab helped me understand how themes and animations enhance user experience.
+                            <p>In Lab 3, I improved the Moodie application by applying Material Design principles, including a custom theme, cards, and animations. I selected colors that reflect mental wellness and created a more visually appealing interface using Card components to organize content. This lab helped me understand how themes and animations enhance user experience.</p>
                         </div>
                     </div>
                 </article>
@@ -498,7 +646,7 @@
                         <p class="card-description">Implementing multi-screen navigation and managing data flow across screens with ViewModel.</p>
                         <div class="card-reflection">
                             <strong>Reflection:</strong>
-                            In Lab 4, I enhanced Moodie by implementing multiple screens using Jetpack Compose Navigation and managing user data with ViewModel. The app was upgraded to allow users to navigate smoothly between different pages while maintaining their mood-related information across screens. I gained a better understanding of application architecture and state management.
+                            <p>In Lab 4, I enhanced Moodie by implementing multiple screens using Jetpack Compose Navigation and managing user data with ViewModel. The app was upgraded to allow users to navigate smoothly between different pages while maintaining their mood-related information across screens. I gained a better understanding of application architecture and state management.</p>
                         </div>
                     </div>
                 </article>
@@ -511,7 +659,7 @@
                         <p class="card-description">Integrating persistent storage with Room Database to save and retrieve mood records.</p>
                         <div class="card-reflection">
                             <strong>Reflection:</strong>
-                            In Lab 5, I integrated Room Database into Moodie to enable persistent storage of users' mood records. By implementing Entity, DAO, Repository, ViewModel, and Room Database components, I was able to save and retrieve mood data even after the application was closed and reopened. This lab helped me understand the MVVM architecture and data persistence.
+                            <p>In Lab 5, I integrated Room Database into Moodie to enable persistent storage of users' mood records. By implementing Entity, DAO, Repository, ViewModel, and Room Database components, I was able to save and retrieve mood data even after the application was closed and reopened. This lab helped me understand the MVVM architecture and data persistence.</p>
                         </div>
                     </div>
                 </article>
@@ -530,7 +678,7 @@
                         <p class="card-description"><strong>Problem:</strong> Mental health awareness is becoming increasingly important, especially among students who often experience stress and anxiety. Moodie provides a simple platform for users to record, track, and reflect on their moods.</p>
                         <div class="card-reflection">
                             <strong>Lessons Learned:</strong>
-                            Through Project 1, I learned how to build a complete multi-screen mobile application using Jetpack Compose, Navigation, and ViewModel. I gained experience in managing shared state across different screens while maintaining a consistent and user-friendly interface. This project strengthened my understanding of mobile application architecture.
+                            <p>Through Project 1, I learned how to build a complete multi-screen mobile application using Jetpack Compose, Navigation, and ViewModel. I gained experience in managing shared state across different screens while maintaining a consistent and user-friendly interface. This project strengthened my understanding of mobile application architecture.</p>
                         </div>
                         <div class="button-group">
                             <a href="https://github.com/a212528-blip/a212528_drrimaniza_project1" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
@@ -546,7 +694,7 @@
                         <p class="card-description"><strong>Problem:</strong> Many individuals struggle to maintain consistent awareness of their emotional well-being and lack tools to track mood patterns over time. Moodie integrates cloud synchronization, real-time data, and device features.</p>
                         <div class="card-reflection">
                             <strong>Lessons Learned:</strong>
-                            Project 2 taught me how to integrate Room Database, Firebase, APIs, and mobile sensors into a single application. I learned how to manage data persistence, cloud synchronization, and real-time information while improving the functionality of Moodie. This experience significantly enhanced my Android development and problem-solving skills.
+                            <p>Project 2 taught me how to integrate Room Database, Firebase, APIs, and mobile sensors into a single application. I learned how to manage data persistence, cloud synchronization, and real-time information while improving the functionality of Moodie. This experience significantly enhanced my Android development and problem-solving skills.</p>
                         </div>
                         <div class="button-group">
                             <a href="https://github.com/a212528-blip/a212528_drrimaniza_project2" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
@@ -656,6 +804,15 @@
                 </article>
             </div>
         </section>
+        <!-- AI Reference Section -->
+        <section id="ai-reference">
+            <h2>AI Assistance Acknowledgment</h2>
+            <div class="ai-reference-box">
+                <p>AI assistance (Claude by Anthropic) was used to support debugging, code structuring, and understanding of key Android development concepts, including Coroutines, StateFlow, Room Database, Retrofit API integration, and Firebase Firestore. The tool also provided guidance on UI design improvements and documentation preparation throughout the development process.</p>
+                
+                <p>All suggestions were carefully reviewed, tested, and adapted by the student. The final implementation was independently completed, with full understanding of the code to satisfy the project's live Q&A and code modification requirements.</p>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -666,4 +823,3 @@
     </footer>
 </body>
 </html>
-```
