@@ -1,745 +1,543 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moodie — e-Portfolio | Nor Shazwani</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    /* ── TOKENS ────────────────────────────────────────────────── */
-    :root {
-      --mint:   #3DAB8B;
-      --sage:   #2A7A5F;
-      --deep:   #153D30;
-      --bloom:  #B5E4D5;
-      --cream:  #F5F9F7;
-      --ink:    #1A2622;
-      --muted:  #667B74;
-      --card:   #FFFFFF;
-      --border: #D4EAE2;
-      --accent: #F4A261;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Portfolio of Nor Shazwani binti Mohd Azmi - Android Development & Moodie Project">
+    <title>Nor Shazwani's e-Portfolio | Moodie Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body:    'Inter', system-ui, sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --accent: #0EA5E9;
+            --light-bg: #F0FFFE;
+            --dark-text: #1F2937;
+            --light-text: #FFFFFF;
+            --border-color: #D1FAE5;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-      --radius: 12px;
-      --shadow: 0 2px 18px rgba(21,61,48,.09);
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+        }
 
-    /* ── RESET ────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-    img { max-width: 100%; display: block; }
-    a { color: var(--mint); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── NAV ──────────────────────────────────────────────────── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 58px;
-    }
-    .nav-brand {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      color: var(--deep);
-      letter-spacing: -.01em;
-    }
-    .nav-brand span { color: var(--mint); }
-    .nav-links {
-      display: flex;
-      gap: 0;
-      list-style: none;
-    }
-    .nav-links a {
-      display: block;
-      padding: .35rem .75rem;
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: .03em;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--mint); text-decoration: none; }
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--primary);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
 
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: .4rem; }
-    .hamburger span {
-      display: block; width: 22px; height: 2px;
-      background: var(--ink); margin: 4px 0;
-      transition: transform .25s, opacity .25s;
-    }
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    @media (max-width: 700px) {
-      .hamburger { display: block; }
-      .nav-links {
-        position: fixed; top: 58px; left: 0; right: 0;
-        background: #fff;
-        flex-direction: column;
-        border-bottom: 1px solid var(--border);
-        padding: .5rem 0 1rem;
-        transform: translateY(-120%);
-        transition: transform .3s ease;
-        opacity: 0;
-        pointer-events: none;
-      }
-      .nav-links.open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .nav-links a { padding: .65rem 1.5rem; font-size: .9rem; }
-    }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-text);
+        }
 
-    /* ── HERO ─────────────────────────────────────────────────── */
-    #home {
-      background: linear-gradient(140deg, var(--deep) 0%, var(--sage) 60%, var(--mint) 100%);
-      color: #fff;
-      padding: 6rem 1.5rem 5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #home::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(181,228,213,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: .78rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--bloom);
-      margin-bottom: 1rem;
-    }
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      letter-spacing: -.02em;
-    }
-    .hero-title em { font-style: italic; color: var(--bloom); }
-    .hero-sub {
-      max-width: 560px;
-      margin: 0 auto 2rem;
-      color: rgba(255,255,255,.82);
-      font-size: 1.05rem;
-    }
-    .hero-meta {
-      display: inline-flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: .78rem;
-      color: var(--bloom);
-      letter-spacing: .06em;
-    }
-    .hero-meta span::before { content: '· '; }
-    .hero-meta span:first-child::before { content: ''; }
-    .sdg-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      margin-top: 2rem;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 100px;
-      padding: .4rem 1rem .4rem .75rem;
-      font-size: .8rem;
-      color: #fff;
-      backdrop-filter: blur(4px);
-    }
-    .sdg-badge .sdg-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
 
-    /* ── SECTIONS ─────────────────────────────────────────────── */
-    section { padding: 5rem 1.5rem; }
-    section:nth-child(even) { background: #fff; }
-    .container { max-width: 1060px; margin: 0 auto; }
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+            font-size: 0.95rem;
+        }
 
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: .6rem;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-      color: var(--deep);
-      margin-bottom: 1rem;
-      letter-spacing: -.02em;
-      line-height: 1.2;
-    }
-    .section-intro {
-      color: var(--muted);
-      max-width: 640px;
-      margin-bottom: 3rem;
-    }
+        nav a:hover {
+            opacity: 0.8;
+        }
 
-    /* ── CARDS ────────────────────────────────────────────────── */
-    .grid { display: grid; gap: 1.75rem; }
-    .grid-2 { grid-template-columns: repeat(auto-fill, minmax(440px, 1fr)); }
-    @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 0.5rem;
+                font-size: 0.85rem;
+            }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(21,61,48,.13);
-    }
+            nav .logo {
+                font-size: 1.2rem;
+            }
+        }
 
-    .video-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      background: var(--deep);
-    }
-    .video-wrap iframe {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-    .card-body { padding: 1.4rem 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
-    .card-label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: .35rem;
-    }
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.22rem;
-      color: var(--deep);
-      margin-bottom: .5rem;
-      line-height: 1.25;
-    }
-    .card-desc {
-      font-size: .9rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .card-reflection {
-      font-size: .875rem;
-      color: var(--ink);
-      border-left: 3px solid var(--bloom);
-      padding-left: .9rem;
-      line-height: 1.65;
-      flex: 1;
-    }
-    .card-footer { padding: 0 1.5rem 1.4rem; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .5rem 1.1rem;
-      border-radius: 8px;
-      font-size: .82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s, transform .15s;
-      border: none;
-    }
-    .btn-primary {
-      background: var(--mint);
-      color: #fff;
-    }
-    .btn-primary:hover { background: var(--sage); text-decoration: none; transform: translateY(-1px); }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--mint);
-      color: var(--mint);
-    }
-    .btn-outline:hover { background: var(--bloom); text-decoration: none; }
+        /* Header/Hero Section */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--light-text);
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
 
-    /* ── PROJECT EXTRA ────────────────────────────────────────── */
-    .problem-statement {
-      font-size: .875rem;
-      background: var(--cream);
-      border-radius: 8px;
-      padding: .75rem 1rem;
-      margin-bottom: 1rem;
-      color: var(--ink);
-      border: 1px solid var(--border);
-    }
-    .problem-statement strong { color: var(--muted); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: .2rem; }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-    /* ── REFLECTION ───────────────────────────────────────────── */
-    #reflection .prose {
-      max-width: 700px;
-      font-size: 1.02rem;
-      color: var(--ink);
-      line-height: 1.8;
-    }
-    #reflection .prose p { margin-bottom: 1rem; }
-    .journey-bar {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-      margin-top: 2.5rem;
-    }
-    .journey-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .journey-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--mint);
-      flex-shrink: 0;
-      margin-top: .45rem;
-    }
-    .journey-text { font-size: .92rem; color: var(--muted); }
+        header .meta {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
 
-    /* ── SKILLS ───────────────────────────────────────────────── */
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .65rem;
-      margin-top: .5rem;
-    }
-    .skill-chip {
-      background: var(--bloom);
-      color: var(--deep);
-      border-radius: 100px;
-      padding: .35rem 1rem;
-      font-size: .82rem;
-      font-family: var(--font-mono);
-      font-weight: 500;
-      letter-spacing: .02em;
-    }
+        header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            line-height: 1.8;
+        }
 
-    /* ── RESOURCES ────────────────────────────────────────────── */
-    .resource-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
-    .resource-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: .75rem;
-      font-size: .92rem;
-      color: var(--ink);
-    }
-    .resource-list li::before {
-      content: '→';
-      color: var(--mint);
-      flex-shrink: 0;
-      font-family: var(--font-mono);
-    }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
 
-    /* ── FOOTER ───────────────────────────────────────────────── */
-    footer {
-      background: var(--deep);
-      color: rgba(255,255,255,.6);
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      font-size: .82rem;
-      font-family: var(--font-mono);
-      letter-spacing: .04em;
-    }
-    footer strong { color: #fff; }
-    footer .footer-sdg {
-      margin-top: .5rem;
-      font-size: .72rem;
-      color: var(--bloom);
-    }
+            header p {
+                font-size: 1rem;
+            }
+        }
 
-    /* ── DIVIDER ──────────────────────────────────────────────── */
-    .divider {
-      width: 40px; height: 3px;
-      background: var(--mint);
-      border-radius: 2px;
-      margin-bottom: 2.5rem;
-    }
+        /* Sections */
+        section {
+            padding: 4rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    /* ── PLACEHOLDER NOTE ─────────────────────────────────────── */
-    .placeholder {
-      font-size: .8rem;
-      font-family: var(--font-mono);
-      color: var(--accent);
-      background: rgba(244,162,97,.08);
-      border: 1px dashed var(--accent);
-      border-radius: 6px;
-      padding: .4rem .75rem;
-      margin-top: .5rem;
-      display: inline-block;
-    }
-  </style>
+        section h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        section h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--light-text);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: #6B7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .card-reflection {
+            background-color: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* YouTube Embed */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0284C7;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tag {
+            background-color: var(--primary);
+            color: var(--light-text);
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Resources List */
+        .resources-list {
+            list-style: none;
+        }
+
+        .resources-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--light-text);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        .resources-list strong {
+            color: var(--primary-dark);
+        }
+
+        /* Reflection Section */
+        .reflection-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                font-size: 0.8rem;
+                gap: 0.3rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ══ NAV ══════════════════════════════════════════════════════ -->
-<header>
-  <nav>
-    <div class="nav-brand">Moodie <span>·</span> Portfolio</div>
-    <button class="hamburger" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#labs">Labs</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#reflection">Reflection</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#resources">Resources</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!-- ══ HERO ══════════════════════════════════════════════════════ -->
-<section id="home">
-  <div class="container" style="position:relative;">
-    <p class="hero-eyebrow">Mobile App Development · e-Portfolio</p>
-    <h1 class="hero-title">Tracking <em>emotions</em>,<br>one day at a time.</h1>
-    <p class="hero-sub">
-      Moodie lets users record their daily emotions, monitor mood patterns, and reflect on their mental well-being over time — built with Jetpack Compose and modern Android architecture.
-    </p>
-    <div class="hero-meta">
-      <span>Nor Shazwani Binti Mohd Azmi</span>
-      <span>A212528</span>
-      <span>2IT1</span>
-      <span>Dr Rimaniza</span>
-    </div>
-    <div style="display:flex;justify-content:center;">
-      <div class="sdg-badge">
-        <div class="sdg-dot"></div>
-        SDG 3 · Good Health and Well-Being
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ LABS ══════════════════════════════════════════════════════ -->
-<section id="labs">
-  <div class="container">
-    <p class="section-label">Hands-on practice</p>
-    <h2 class="section-title">Lab Sessions</h2>
-    <div class="divider"></div>
-    <p class="section-intro">Five labs progressively building Moodie from a static screen to a data-driven, navigable application.</p>
-
-    <div class="grid grid-2">
-
-      <!-- LAB 1 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/tRL0o0DVVlc" title="Lab 1 – UI Demo" allowfullscreen loading="lazy"></iframe>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Moodie Portfolio</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#labs">Labs</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#reflection">Reflection</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
         </div>
-        <div class="card-body">
-          <p class="card-label">Lab 1</p>
-          <h3 class="card-title">UI — Jetpack Compose Layouts</h3>
-          <p class="card-desc">Designing Moodie's home screen using Column, Row, and Box to build a clean, structured interface from scratch.</p>
-          <blockquote class="card-reflection">
-            This lab helped me understand the basics of Jetpack Compose layouts through the development of Moodie's home screen. I applied Column, Row, and Box components to arrange interface elements in a structured and user-friendly way. The experience improved my understanding of UI design and prepared me for future app development tasks.
-          </blockquote>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="container">
+            <h1>Nor Shazwani binti Mohd Azmi</h1>
+            <div class="meta">Matric No: A212528 | Programme: 2IT1 | Instructor: Dr. Rimaniza</div>
+            <p><strong>Moodie</strong> — A mental wellness mobile application that lets users record their daily emotions, monitor mood patterns, and reflect on their mental well-being over time — built with Jetpack Compose and modern Android architecture.</p>
+            <p style="font-size: 0.95rem; margin-top: 1.5rem; opacity: 0.9;">Supporting <strong>SDG 3: Good Health and Well-Being</strong>, because Moodie promotes mental wellness by enabling users to track, understand, and reflect on their emotions regularly.</p>
         </div>
-      </article>
+    </header>
 
-      <!-- LAB 2 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/tSqkzrSISGk" title="Lab 2 – Interaction Demo" allowfullscreen loading="lazy"></iframe>
+    <!-- Labs Section -->
+    <section id="labs">
+        <div class="container">
+            <h2>Labs & Learning Journey</h2>
+            <div class="card-grid">
+                <!-- Lab 1 -->
+                <div class="card">
+                    <h3>Lab 1: Jetpack Compose UI Fundamentals</h3>
+                    <p class="card-description">Exploring layouts with Column, Row, and Box components to build Moodie's home screen interface.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/tRL0o0DVVlc" title="Lab 1 - UI Design with Jetpack Compose" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Reflection:</strong> This lab helped me understand the basics of Jetpack Compose layouts through the development of Moodie's home screen. I applied Column, Row, and Box components to arrange interface elements in a structured and user-friendly way. The experience improved my understanding of UI design and prepared me for future app development tasks.
+                    </div>
+                </div>
+
+                <!-- Lab 2 -->
+                <div class="card">
+                    <h3>Lab 2: Interactive Components & State Management</h3>
+                    <p class="card-description">Adding TextField, Button interactions, and state management with remember and mutableStateOf.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/tSqkzrSISGk" title="Lab 2 - Interactive Features" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Reflection:</strong> In Lab 2, I enhanced Moodie by adding interactive features using TextField, Button, and state management with remember and mutableStateOf. Users can enter information and receive immediate feedback on the screen, making the application more engaging and responsive. Through this lab, I gained a better understanding of how state works in Jetpack Compose and how dynamic user interactions improve the overall user experience.
+                    </div>
+                </div>
+
+                <!-- Lab 3 -->
+                <div class="card">
+                    <h3>Lab 3: Material Design & Visual Enhancement</h3>
+                    <p class="card-description">Applying Material Design principles, custom themes, cards, and animations to Moodie.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/B9uX4tmRLe4" title="Lab 3 - Material Design" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Reflection:</strong> In Lab 3, I improved the Moodie application by applying Material Design principles, including a custom theme, cards, and animations. I selected colors that reflect mental wellness and created a more visually appealing interface using Card components to organize content. This lab helped me understand how themes, typography, and animations can enhance user experience and make an application look more professional.
+                    </div>
+                </div>
+
+                <!-- Lab 4 -->
+                <div class="card">
+                    <h3>Lab 4: Navigation & ViewModel Architecture</h3>
+                    <p class="card-description">Implementing multi-screen navigation using Jetpack Compose Navigation and managing state with ViewModel.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zVbksrkpe2E" title="Lab 4 - Navigation & Architecture" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Reflection:</strong> In Lab 4, I enhanced Moodie by implementing multiple screens using Jetpack Compose Navigation and managing user data with ViewModel. The app was upgraded to allow users to navigate smoothly between different pages while maintaining their mood-related information across screens. Through this lab, I gained a better understanding of application architecture, state management, and how ViewModel helps preserve data during configuration changes.
+                    </div>
+                </div>
+
+                <!-- Lab 5 -->
+                <div class="card">
+                    <h3>Lab 5: Room Database & Data Persistence</h3>
+                    <p class="card-description">Integrating Room Database for persistent storage of mood records with Entity, DAO, and Repository patterns.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/bP-iGpWCfXs" title="Lab 5 - Room Database" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Reflection:</strong> In Lab 5, I integrated Room Database into Moodie to enable persistent storage of users' mood records. By implementing Entity, DAO, Repository, ViewModel, and Room Database components, I was able to save and retrieve mood data even after the application was closed and reopened. This lab helped me understand the MVVM architecture and the importance of data persistence in developing reliable mobile applications.
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <p class="card-label">Lab 2</p>
-          <h3 class="card-title">Interaction — State Management</h3>
-          <p class="card-desc">Adding TextField, Button, and Compose state with <code style="font-family:var(--font-mono);font-size:.82em;">remember</code> and <code style="font-family:var(--font-mono);font-size:.82em;">mutableStateOf</code> for real-time user feedback.</p>
-          <blockquote class="card-reflection">
-            In Lab 2, I enhanced Moodie by adding interactive features using TextField, Button, and state management with remember and mutableStateOf. Users can enter information and receive immediate feedback on the screen, making the application more engaging and responsive. Through this lab, I gained a better understanding of how state works in Jetpack Compose and how dynamic user interactions improve the overall user experience.
-          </blockquote>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="card-grid">
+                <!-- Project 1 -->
+                <div class="card">
+                    <h3>Project 1: Moodie Multi-Screen Application</h3>
+                    <p class="card-description"><strong>Problem:</strong> Mental health awareness is becoming increasingly important, especially among students who often experience stress, anxiety, and emotional challenges in their daily lives. However, many individuals do not regularly monitor their emotional well-being, making it difficult to identify mood patterns and seek support when needed. Moodie provides a simple platform for users to record, track, and reflect on their moods.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/rO1SQBHQxos" title="Project 1 - Moodie VSR" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Lessons Learned:</strong> Through Project 1, I learned how to build a complete multi-screen mobile application using Jetpack Compose, Navigation, and ViewModel. I gained experience in managing shared state across different screens while maintaining a consistent and user-friendly interface. This project strengthened my understanding of mobile application architecture and prepared me for more advanced features such as databases, APIs, and cloud integration in Project 2.
+                    </div>
+                    <div class="button-group">
+                        <a href="https://github.com/a212528-blip/a212528_drrimaniza_project1" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="card">
+                    <h3>Project 2: Moodie with Cloud & Sensors Integration</h3>
+                    <p class="card-description"><strong>Problem:</strong> Many individuals struggle to maintain consistent awareness of their emotional well-being and often lack tools to track mood patterns over time. Moodie addresses this issue by integrating mood tracking, cloud synchronization, real-time data, and mobile device features to help users better understand and manage their mental health.</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/11DeLTEvbPY" title="Project 2 - Moodie VSR" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="card-reflection">
+                        <strong>Lessons Learned:</strong> Project 2 taught me how to integrate Room Database, Firebase, APIs, and mobile sensors into a single application. I learned how to manage data persistence, cloud synchronization, and real-time information while improving the functionality of Moodie. This experience significantly enhanced my Android development and problem-solving skills.
+                    </div>
+                    <div class="button-group">
+                        <a href="https://github.com/a212528-blip/a212528_drrimaniza_project2" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </article>
+    </section>
 
-      <!-- LAB 3 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/B9uX4tmRLe4" title="Lab 3 – Material Design Demo" allowfullscreen loading="lazy"></iframe>
+    <!-- Reflection Section -->
+    <section id="reflection">
+        <div class="container">
+            <h2>Reflection & Learning Journey</h2>
+            <div class="reflection-box">
+                <p>Throughout this course, I progressed from designing a simple static interface in Lab 1 to developing Moodie, a fully functional mobile application with navigation, persistent storage, cloud integration, APIs, and sensor features. Each lab introduced new concepts that gradually strengthened my skills in Jetpack Compose, state management, Material Design, ViewModel, and Room Database.</p>
+                <p style="margin-top: 1rem;">One of the biggest challenges was integrating multiple technologies into a single application, but overcoming these challenges improved my problem-solving and development skills. Overall, this learning journey has deepened my understanding of Android application development while allowing me to create a solution that supports <strong>SDG 3: Good Health and Well-Being</strong>.</p>
+            </div>
         </div>
-        <div class="card-body">
-          <p class="card-label">Lab 3</p>
-          <h3 class="card-title">Material Design — Themes &amp; Animation</h3>
-          <p class="card-desc">Applying a custom Material theme, Card components, and animations to create a polished, wellness-inspired visual identity.</p>
-          <blockquote class="card-reflection">
-            In Lab 3, I improved the Moodie application by applying Material Design principles, including a custom theme, cards, and animations. I selected colors that reflect mental wellness and created a more visually appealing interface using Card components to organize content. This lab helped me understand how themes, typography, and animations can enhance user experience and make an application look more professional.
-          </blockquote>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills & Tech Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">Kotlin</div>
+                <div class="skill-tag">Jetpack Compose</div>
+                <div class="skill-tag">Room Database</div>
+                <div class="skill-tag">Retrofit</div>
+                <div class="skill-tag">Firebase Firestore</div>
+                <div class="skill-tag">ML Kit</div>
+                <div class="skill-tag">CameraX</div>
+                <div class="skill-tag">Material Design 3</div>
+                <div class="skill-tag">DAO Pattern</div>
+                <div class="skill-tag">MVVM Architecture</div>
+                <div class="skill-tag">ViewModel</div>
+                <div class="skill-tag">State Management</div>
+            </div>
         </div>
-      </article>
+    </section>
 
-      <!-- LAB 4 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/zVbksrkpe2E" title="Lab 4 – Navigation Demo" allowfullscreen loading="lazy"></iframe>
+    <!-- Resources Section -->
+    <section id="resources">
+        <div class="container">
+            <h2>Resources & References</h2>
+            <ul class="resources-list">
+                <li>
+                    <strong>Firebase Firestore API</strong> — Used for cloud database storage and real-time data synchronization between users and the application.
+                </li>
+                <li>
+                    <strong>Jetpack Compose</strong> — Modern Android UI toolkit used to build declarative and responsive user interfaces.
+                </li>
+                <li>
+                    <strong>Android Navigation Component</strong> — Used to manage multi-screen navigation and data passing between screens.
+                </li>
+                <li>
+                    <strong>ViewModel</strong> — Used for state management and lifecycle-aware data handling.
+                </li>
+                <li>
+                    <strong>Room Database</strong> — Used for local offline data storage and caching.
+                </li>
+                <li>
+                    <strong>Material Design Components</strong> — Used to ensure consistent UI/UX design following Android design guidelines.
+                </li>
+                <li>
+                    <strong>Retrofit</strong> — Type-safe HTTP networking standard pipeline for data fetch blocks.
+                </li>
+                <li>
+                    <strong>Activity Result API</strong> — Hardware interface for local image assets acquisition.
+                </li>
+            </ul>
         </div>
-        <div class="card-body">
-          <p class="card-label">Lab 4</p>
-          <h3 class="card-title">Navigation — Multi-Screen &amp; ViewModel</h3>
-          <p class="card-desc">Implementing Jetpack Compose Navigation and ViewModel so users move fluidly between screens while mood data persists across them.</p>
-          <blockquote class="card-reflection">
-            In Lab 4, I enhanced Moodie by implementing multiple screens using Jetpack Compose Navigation and managing user data with ViewModel. The app was upgraded to allow users to navigate smoothly between different pages while maintaining their mood-related information across screens. Through this lab, I gained a better understanding of application architecture, state management, and how ViewModel helps preserve data during configuration changes.
-          </blockquote>
-        </div>
-      </article>
+    </section>
 
-      <!-- LAB 5 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/11DeLTEvbPY" title="Lab 5 – Room Database Demo" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="card-body">
-          <p class="card-label">Lab 5</p>
-          <h3 class="card-title">Room — Persistent Local Storage</h3>
-          <p class="card-desc">Integrating Room Database (Entity, DAO, Repository) so mood records survive app restarts using the full MVVM pattern.</p>
-          <blockquote class="card-reflection">
-            In Lab 5, I integrated Room Database into Moodie to enable persistent storage of users' mood records. By implementing Entity, DAO, Repository, ViewModel, and Room Database components, I was able to save and retrieve mood data even after the application was closed and reopened. This lab helped me understand the MVVM architecture and the importance of data persistence in developing reliable mobile applications.
-          </blockquote>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ PROJECTS ═══════════════════════════════════════════════════ -->
-<section id="projects">
-  <div class="container">
-    <p class="section-label">Culminating work</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="divider"></div>
-    <p class="section-intro">Two projects demonstrate Moodie evolving from a navigable prototype into a fully integrated application.</p>
-
-    <div class="grid grid-2">
-
-      <!-- PROJECT 1 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/rO1SQBHQxos" title="Project 1 – Moodie VSR" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="card-body">
-          <p class="card-label">Project 1 · Lab 4 + Working Features</p>
-          <h3 class="card-title">Moodie — Navigation Prototype</h3>
-          <div class="problem-statement">
-            <strong>Problem Statement</strong>
-            Many people struggle to recognise and understand their emotional patterns, making it difficult to take proactive steps toward mental well-being.
-          </div>
-           <blockquote class="card-reflection">
-           Through Project 1, I learned how to build a complete multi-screen mobile application using Jetpack Compose, Navigation, and ViewModel. I gained experience in managing shared state across different screens while maintaining a consistent and user-friendly interface. This project strengthened my understanding of mobile application architecture and prepared me for more advanced features such as databases, APIs, and cloud integration in Project 2.
-          </blockquote>
-        </div>
-        <div class="card-footer">
-          <a href="https://github.com/a212528-blip/a212528_drrimaniza_project1" class="btn btn-primary" aria-label="View Project 1 on GitHub">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.004 2.05.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      </article>
-
-      <!-- PROJECT 2 -->
-      <article class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/11DeLTEvbPY" title="Project 2 – Moodie VSR" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="card-body">
-          <p class="card-label">Project 2 · Lab 5 + API + Sensors + Cloud</p>
-          <h3 class="card-title">Moodie — Full-Stack Mobile App</h3>
-          <div class="problem-statement">
-            <strong>Problem Statement</strong>
-            Without persistent tracking and real-time insights, users lack the tools needed to understand emotional trends and maintain consistent mental wellness habits.
-          </div>
-          <blockquote class="card-reflection">
-            Project 2 taught me how to integrate Room Database, Firebase, APIs, and mobile sensors into a single application. I learned how to manage data persistence, cloud synchronisation, and real-time information while improving the functionality of Moodie. This experience significantly enhanced my Android development and problem-solving skills.
-          </blockquote>
-        </div>
-        <div class="card-footer">
-          <a href="https://github.com/a212528-blip/a212528_drrimaniza_project2" class="btn btn-primary" aria-label="View Project 2 on GitHub">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.004 2.05.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ REFLECTION ═════════════════════════════════════════════════ -->
-<section id="reflection">
-  <div class="container">
-    <p class="section-label">Looking back</p>
-    <h2 class="section-title">Reflection &amp; Learning Journey</h2>
-    <div class="divider"></div>
-
-    <div class="prose">
-      <p>Throughout this course, I progressed from designing a simple static interface in Lab 1 to developing Moodie, a fully functional mobile application with navigation, persistent storage, cloud integration, APIs, and sensor features.</p>
-      <p>Each lab introduced new concepts that gradually strengthened my skills in Jetpack Compose, state management, Material Design, ViewModel, and Room Database. One of the biggest challenges was integrating multiple technologies into a single application, but overcoming these challenges improved my problem-solving and development skills.</p>
-      <p>Overall, this learning journey has deepened my understanding of Android application development while allowing me to create a solution that supports <strong>SDG 3: Good Health and Well-Being</strong>.</p>
-    </div>
-
-    <div class="journey-bar">
-      <div class="journey-item">
-        <div class="journey-dot"></div>
-        <p class="journey-text"><strong>Lab 1</strong> — Static UI with Jetpack Compose (Column, Row, Box)</p>
-      </div>
-      <div class="journey-item">
-        <div class="journey-dot"></div>
-        <p class="journey-text"><strong>Lab 2</strong> — Interactive inputs with state management</p>
-      </div>
-      <div class="journey-item">
-        <div class="journey-dot"></div>
-        <p class="journey-text"><strong>Lab 3</strong> — Material Design theming, Cards &amp; animations</p>
-      </div>
-      <div class="journey-item">
-        <div class="journey-dot"></div>
-        <p class="journey-text"><strong>Lab 4</strong> — Multi-screen navigation with ViewModel</p>
-      </div>
-      <div class="journey-item">
-        <div class="journey-dot"></div>
-        <p class="journey-text"><strong>Lab 5</strong> — Persistent storage via Room Database &amp; MVVM</p>
-      </div>
-      <div class="journey-item">
-        <div class="journey-dot" style="background:var(--accent);"></div>
-        <p class="journey-text"><strong>Project 2</strong> — Firebase, APIs, sensors, and cloud sync fully integrated</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SKILLS ═════════════════════════════════════════════════════ -->
-<section id="skills">
-  <div class="container">
-    <p class="section-label">Tech stack</p>
-    <h2 class="section-title">Skills &amp; Technologies</h2>
-    <div class="divider"></div>
-    <p class="section-intro">Tools, languages, and libraries used across all labs and projects.</p>
-
-    <div class="skills-grid">
-      <span class="skill-chip">Kotlin</span>
-      <span class="skill-chip">Jetpack Compose</span>
-      <span class="skill-chip">Material Design 3</span>
-      <span class="skill-chip">ViewModel</span>
-      <span class="skill-chip">Room Database</span>
-      <span class="skill-chip">Retrofit</span>
-      <span class="skill-chip">Firebase Firestore</span>
-      <span class="skill-chip">Firebase Auth</span>
-      <span class="skill-chip">ML Kit</span>
-      <span class="skill-chip">CameraX</span>
-      <span class="skill-chip">Android Sensors</span>
-      <span class="skill-chip">MVVM Architecture</span>
-      <span class="skill-chip">Navigation Compose</span>
-      <span class="skill-chip">Coroutines</span>
-      <span class="skill-chip">Android Studio</span>
-      <span class="skill-chip">GitHub</span>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ RESOURCES ══════════════════════════════════════════════════ -->
-<section id="resources">
-  <div class="container">
-    <p class="section-label">Acknowledgements</p>
-    <h2 class="section-title">Resources &amp; References</h2>
-    <div class="divider"></div>
-
-    <ul class="resource-list">
-      <li>Android Developers — <a href="https://developer.android.com/jetpack/compose" target="_blank" rel="noopener">Jetpack Compose Documentation</a></li>
-
-      <li>Google — <a href="https://m3.material.io/" target="_blank" rel="noopener">Material Design 3 Guidelines</a></li>
-
-      <li>Android Developers — <a href="https://developer.android.com/training/data-storage/room" target="_blank" rel="noopener">Room Persistence Library</a></li>
-
-      <li>Firebase — <a href="https://firebase.google.com/docs/firestore" target="_blank" rel="noopener">Cloud Firestore Documentation</a></li>
-
-      <li>Android Developers — <a href="https://developer.android.com/topic/libraries/architecture/viewmodel" target="_blank" rel="noopener">ViewModel Overview</a></li>
-
-      <li>Square — <a href="https://square.github.io/retrofit/" target="_blank" rel="noopener">Retrofit 2 HTTP Client</a></li>
-
-      <li>Google ML Kit — <a href="https://developers.google.com/ml-kit" target="_blank" rel="noopener">ML Kit Documentation</a></li>
-
-      <li>Android Developers — <a href="https://developer.android.com/training/basics/intents/result" target="_blank" rel="noopener">Activity Result API Documentation</a></li>
-
-      <li>Android Developers — <a href="https://developer.android.com/jetpack/compose/navigation" target="_blank" rel="noopener">Navigation Compose Documentation</a></li>
-
-      <li>
-        AI assistance (Claude by Anthropic) was used to support debugging, 
-        code structuring, and understanding of key Android development concepts, 
-        including Coroutines, StateFlow, Room Database, Retrofit API integration, 
-        and Firebase Firestore. The tool also provided guidance on UI design improvements 
-        and documentation preparation throughout the development process. 
-        All suggestions were carefully reviewed, tested, and adapted by the student. 
-        The final implementation was independently completed, with full understanding of 
-        the code to satisfy the project's live Q&A and code modification requirements.
-      </li>
-    </ul>
-
-  </div>
-</section>
-
-<!-- ══ FOOTER ══════════════════════════════════════════════════════ -->
-<footer>
-  <strong>Nor Shazwani Binti Mohd Azmi</strong> · A212528 · 2IT1<br>
-  Instructor: Dr Rimaniza · Mobile Application Development · 2025
-  <p class="footer-sdg">SDG 3 — Good Health and Well-Being</p>
-</footer>
-
-<!-- ══ SCRIPTS ══════════════════════════════════════════════════════ -->
-<script>
-  // Hamburger toggle
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('navLinks');
-  btn.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open);
-  });
-  // Close on link click (mobile)
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      btn.setAttribute('aria-expanded', false);
-    });
-  });
-</script>
-
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Nor Shazwani binti Mohd Azmi | Matric No: A212528 | Programme: 2IT1</p>
+        <p>Submitted to: Dr. Rimaniza | Faculty of Information and Communication Technology</p>
+    </footer>
 </body>
 </html>
-```
